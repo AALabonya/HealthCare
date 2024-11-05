@@ -1,10 +1,10 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import router from './app/routes';
+
 import httpStatus from 'http-status';
-import globalErrorHandler from './app/middlewares/globalErrorHandler';
+
 import cookieParser from 'cookie-parser';
-import { AppointmentService } from './app/modules/Appointment/appointment.service';
+
 import cron from 'node-cron'
 
 const app: Application = express();
@@ -17,14 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-cron.schedule('* * * * *', () => {
-    try {
-        AppointmentService.cancelUnpaidAppointments();
-    }
-    catch (err) {
-        console.error(err);
-    }
-});
+// cron.schedule('* * * * *', () => {
+//     try {
+//         AppointmentService.cancelUnpaidAppointments();
+//     }
+//     catch (err) {
+//         console.error(err);
+//     }
+// });
 
 app.get('/', (req: Request, res: Response) => {
     res.send({
@@ -32,9 +32,9 @@ app.get('/', (req: Request, res: Response) => {
     })
 });
 
-app.use('/api/v1', router);
+// app.use('/api/v1', router);
 
-app.use(globalErrorHandler);
+// app.use(globalErrorHandler);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     res.status(httpStatus.NOT_FOUND).json({
