@@ -6,7 +6,8 @@ import httpStatus from 'http-status';
 import cookieParser from 'cookie-parser';
 
 import cron from 'node-cron'
-import { userRoutes } from './app/modules/User/user';
+import { userRoutes } from './app/modules/User/user.routes';
+
 
 const app: Application = express();
 app.use(cors());
