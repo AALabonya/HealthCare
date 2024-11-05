@@ -4,3 +4,7 @@ const createAdmin = async()=>{
         message:"admin create"
     }
 }
+
+export const userService ={
+    createAdmin
+}
