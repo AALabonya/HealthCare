@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response} from 'express';
 import cors from 'cors';
 
 import httpStatus from 'http-status';
@@ -6,6 +6,7 @@ import httpStatus from 'http-status';
 import cookieParser from 'cookie-parser';
 
 import cron from 'node-cron'
+import { userRoutes } from './app/modules/User/user';
 
 const app: Application = express();
 app.use(cors());
@@ -32,7 +33,7 @@ app.get('/', (req: Request, res: Response) => {
     })
 });
 
-// app.use('/api/v1', router);
+app.use('/api/v1', userRoutes);
 
 // app.use(globalErrorHandler);
 
