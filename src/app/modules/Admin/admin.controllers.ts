@@ -12,6 +12,10 @@ const getAllFromDB= async(req:Request, res:Response)=>{
         data: result
      })
     } catch (error) {
-        
+       res.status(500).json({
+         success:false,
+         message:error?.name || "Something went wrong",
+         data: error
+       })
     }
 }
