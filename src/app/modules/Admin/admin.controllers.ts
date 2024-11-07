@@ -19,3 +19,7 @@ const getAllFromDB= async(req:Request, res:Response)=>{
        })
     }
 }
+
+export const adminController={
+    getAllFromDB
+}
