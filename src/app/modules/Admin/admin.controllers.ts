@@ -4,5 +4,14 @@ import { Request, Response } from "express";
 const prisma =new PrismaClient()
 
 const getAllFromDB= async(req:Request, res:Response)=>{
-    const result = await
+    try {
+        const result = await prisma.admin.findMany()
+     res.status(200).json({
+        success:true,
+        message: "Admin fached successfully",
+        data: result
+     })
+    } catch (error) {
+        
+    }
 }
