@@ -3,14 +3,22 @@ import { userService } from "./user.service";
 import { log } from "console";
 
 const createAdmin = async(req:Request, res:Response)=>{
-    // console.log(req.body)
-  const result = await  userService.createAdmin(req.body);
-  // res.send(result)
-  res.status(200).json({
-    success:true,
-    message:"Admin Created successfully",
-    data:result
+try {
+      // console.log(req.body)
+      const result = await  userService.createAdmin(req.body);
+      // res.send(result)
+      res.status(200).json({
+        success:true,
+        message:"Admin Created successfully",
+        data:result
+      })
+} catch (error) {
+  res.status(500).json({
+    success:false,
+    message: error?.name || "Something went wrong",
+    error:error
   })
+}
 }
 
 export const userController ={
