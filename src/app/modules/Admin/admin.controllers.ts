@@ -5,7 +5,7 @@ const prisma =new PrismaClient()
 
 const getAllFromDB= async(req:Request, res:Response)=>{
     try {
-        const result = await prisma.admin.findMany()
+       
      res.status(200).json({
         success:true,
         message: "Admin fached successfully",
