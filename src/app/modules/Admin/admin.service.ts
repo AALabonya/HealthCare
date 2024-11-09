@@ -44,7 +44,9 @@ const {searchTerm, ...filterData}=params
         where:whereConditions,
         skip: (Number(page)-1)* limit,
         take:Number(limit),
-        orderBy:{
+        orderBy:options.sortBy && options.sortOrder ?{
+            [options.sortBy]:options.sortOrder
+        }:{
             createdAt:'desc'
         }
     })
