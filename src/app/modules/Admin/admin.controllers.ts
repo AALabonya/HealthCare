@@ -14,7 +14,8 @@ const pick =<T extends Record<string, unknown>, k extends keyof T>(obj:T, keys:k
 
 const getAllFromDB= async(req:Request, res:Response)=>{
     try {
-       const result = await adminServices.getAllFromDB()
+      const filters = pick(req.query,['name','email','searchTerm','contactNumber'])
+       const result = await adminServices.getAllFromDB(filters)
      res.status(200).json({
         success:true,
         message: "Admin fached successfully",
