@@ -1,8 +1,10 @@
 import { Prisma, PrismaClient } from "@prisma/client"
 import { object } from "zod";
+import { adminSearchFields } from "./admin.constant";
 
 const prisma =new PrismaClient()
-const getAllFromDB= async(params:any)=>{
+const getAllFromDB= async(params:any, options:any)=>{
+    const {limit,page}= options
 const {searchTerm, ...filterData}=params
     const andConditions:Prisma.AdminWhereInput[] =[];
     // OR:[
@@ -18,7 +20,7 @@ const {searchTerm, ...filterData}=params
     //         }
     //     }
     //    ]
-const adminSearchFields=['name','email'];
+
     if(params.searchTerm){
         andConditions.push({
             OR:adminSearchFields.map(field=>({
@@ -39,7 +41,12 @@ const adminSearchFields=['name','email'];
     }
     const whereConditions: Prisma.AdminWhereInput={AND: andConditions}
     const result = await prisma.admin.findMany({
-        where:whereConditions
+        where:whereConditions,
+        skip: (Number(page)-1)* limit,
+        take:Number(limit),
+        orderBy:{
+            createdAt:'desc'
+        }
     })
 
     return result

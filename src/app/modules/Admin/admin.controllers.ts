@@ -9,7 +9,10 @@ import { adminFilterableFields } from "./admin.constant";
 const getAllFromDB= async(req:Request, res:Response)=>{
     try {
       const filters = pick(req.query,adminFilterableFields)
-       const result = await adminServices.getAllFromDB(filters)
+      const options=pick(req.query,['limit','page','sortBy','sortOrder']);
+      console.log(options);
+      
+       const result = await adminServices.getAllFromDB(filters, options)
      res.status(200).json({
         success:true,
         message: "Admin fached successfully",
