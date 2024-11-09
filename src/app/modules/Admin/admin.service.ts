@@ -1,10 +1,17 @@
 import { Prisma, PrismaClient } from "@prisma/client"
 import { object } from "zod";
 import { adminSearchFields } from "./admin.constant";
+import { paginationHelper } from "../../../helpers/paginationHelper";
 
 const prisma =new PrismaClient()
+
+
+
+
+
+
 const getAllFromDB= async(params:any, options:any)=>{
-    const {limit,page}= options
+    const {limit,page}= paginationHelper.calculatePagination(options)
 const {searchTerm, ...filterData}=params
     const andConditions:Prisma.AdminWhereInput[] =[];
     // OR:[
@@ -42,8 +49,8 @@ const {searchTerm, ...filterData}=params
     const whereConditions: Prisma.AdminWhereInput={AND: andConditions}
     const result = await prisma.admin.findMany({
         where:whereConditions,
-        skip: (Number(page)-1)* limit,
-        take:Number(limit),
+        skip,
+        take:limit,
         orderBy:options.sortBy && options.sortOrder ?{
             [options.sortBy]:options.sortOrder
         }:{
