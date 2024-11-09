@@ -1,16 +1,9 @@
 
 import { Request, Response } from "express";
 import { adminServices } from "./admin.service";
+import pick from "../../../shared/pick";
 
-const pick =<T extends Record<string, unknown>, k extends keyof T>(obj:T, keys:k[]):Partial<T> =>{
-   const finalObj:Partial<T>={};
-   for(const key of keys){
-      if(obj && Object.hasOwnProperty.call(obj, key)){
-      finalObj[key]=obj[key]
-      }
-   }
-   return finalObj
-}
+
 
 const getAllFromDB= async(req:Request, res:Response)=>{
     try {
