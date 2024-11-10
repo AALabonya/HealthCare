@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { adminServices } from "./admin.service";
 import pick from "../../../shared/pick";
 import { adminFilterableFields } from "./admin.constant";
+import httpStatus from "http-status";
 
 
 
@@ -27,7 +28,18 @@ const getAllFromDB= async(req:Request, res:Response)=>{
        })
     }
 }
+const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
 
+  const result = await adminServices.getByIdFromDB(id);
+  sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Admin data fetched by id!",
+      data: result
+  });
+})
 export const adminController={
-    getAllFromDB
+    getAllFromDB,
+    getByIdFromDB
 }
