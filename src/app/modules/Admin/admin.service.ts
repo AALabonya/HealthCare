@@ -60,9 +60,11 @@ const {searchTerm, ...filterData}=params
     })
 
     return {
+       meta:{
         page,
-        limit,
-        result
+        limit
+       },
+        data:result
     }
 }
 
