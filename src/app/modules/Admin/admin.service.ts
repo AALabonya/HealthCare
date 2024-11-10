@@ -1,9 +1,10 @@
-import { Prisma, PrismaClient } from "@prisma/client"
-import { object } from "zod";
+
 import { adminSearchFields } from "./admin.constant";
 import { paginationHelper } from "../../../helpers/paginationHelper";
+import { Prisma } from "@prisma/client";
+import prisma from "../../../shared/prisma";
 
-const prisma =new PrismaClient()
+
 
 
 
@@ -11,7 +12,7 @@ const prisma =new PrismaClient()
 
 
 const getAllFromDB= async(params:any, options:any)=>{
-    const {limit,page}= paginationHelper.calculatePagination(options)
+    const {limit,page, skip}= paginationHelper.calculatePagination(options)
 const {searchTerm, ...filterData}=params
     const andConditions:Prisma.AdminWhereInput[] =[];
     // OR:[
@@ -58,7 +59,11 @@ const {searchTerm, ...filterData}=params
         }
     })
 
-    return result
+    return {
+        page,
+        limit,
+        result
+    }
 }
 
 export const adminServices={

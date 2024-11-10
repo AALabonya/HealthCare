@@ -1,17 +1,28 @@
-const calculatePagination=(options:{
+type IOptions = {
     page?: number,
     limit?: number,
-    sortBy?: string,
-    sortOrder?:string
-})=>{
-    const   page: number =Number(options.page)|| 1;
-    const limit: number=Number(options.limit)|| 10;
-    const skip: numbe= Number(page-1) * limit;
+    sortOrder?: string,
+    sortBy?: string
+}
 
-    const sortBy: string=options.sortBy ||'createdAt';
-    const sortOrder:string=options.sortOrder|| 'desc'
+type IOptionsResult = {
+    page: number,
+    limit: number,
+    skip: number,
+    sortBy: string,
+    sortOrder: string
+}
 
-    return{
+const calculatePagination = (options: IOptions): IOptionsResult => {
+
+    const page: number = Number(options.page) || 1;
+    const limit: number = Number(options.limit) || 10;
+    const skip: number = (Number(page) - 1) * limit;
+
+    const sortBy: string = options.sortBy || 'createdAt';
+    const sortOrder: string = options.sortOrder || 'desc';
+
+    return {
         page,
         limit,
         skip,
@@ -20,6 +31,7 @@ const calculatePagination=(options:{
     }
 }
 
-export const paginationHelper={
+
+export const paginationHelper = {
     calculatePagination
 }
