@@ -45,12 +45,13 @@ model Admin{
 
 enum UserRole {
   SUPER_ADMIN
-  Admin
-  Doctor
+  ADMIN
+  DOCTOR
   PATIENT
 }
 
 enum UserStatus {
-  ACTIVE 
+  ACTIVE
   BLOCKED
+  DELETED
 }

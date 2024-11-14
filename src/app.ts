@@ -5,9 +5,7 @@ import httpStatus from 'http-status';
 
 import cookieParser from 'cookie-parser';
 
-import cron from 'node-cron'
-import { userRoutes } from './app/modules/User/user.routes';
-import { adminRoutes } from './app/modules/Admin/admin.routes';
+import router from './app/routes';
 
 
 const app: Application = express();
@@ -35,8 +33,8 @@ app.get('/', (req: Request, res: Response) => {
     })
 });
 
-app.use('/api/v1', userRoutes);
-app.use('/api/v1', adminRoutes);
+app.use('/api/v1', router);
+
 // app.use(globalErrorHandler);
 
 app.use((req: Request, res: Response, next: NextFunction) => {

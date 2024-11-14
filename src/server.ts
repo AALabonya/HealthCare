@@ -6,7 +6,7 @@ const port =3000
 
 async function main() {
     const server: Server = app.listen(port, () => {
-        console.log("Sever is running on port ",port);
+        console.log("Sever is running also database connected successfully",port);
     });
 
     const exitHandler = () => {
