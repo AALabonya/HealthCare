@@ -1,7 +1,10 @@
 import { log } from "console"
 
-const loginUser= async()=>{
-    console.log("login service");
+const loginUser= async(payload:{
+    email:string,
+    password:string
+})=>{
+    console.log("login service", payload);
     
 }
 
