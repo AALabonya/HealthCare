@@ -6,3 +6,5 @@ const update=z.object({
         contactNumber:z.string().optional()
     })
 })
+
+export const adminValidationSchema={update}
