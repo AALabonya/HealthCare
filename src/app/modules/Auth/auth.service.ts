@@ -1,7 +1,10 @@
-import { log } from "console"
+
 import prisma from "../../../shared/prisma";
+import * as bcrypt from 'bcrypt'
+
 
 const loginUser= async(payload:{
+
     email:string,
     password:string
 })=>{
@@ -10,8 +13,9 @@ const loginUser= async(payload:{
             email:payload.email
         }
     })
-    
-    console.log("login service", payload);
+
+    const isCorrectPassword = await bcrypt.compare(payload.password, userData.password)
+    console.log("login service", isCorrectPassword);
     
 }
 
