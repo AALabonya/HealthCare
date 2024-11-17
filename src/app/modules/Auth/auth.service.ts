@@ -55,7 +55,15 @@ const refreshToken= jwt.sign({
 }
 
 
+const refreshToken= async()=>{
+    console.log('refresh token');
+    
+}
+
+
+
 
 export const authServices={
-    loginUser
+    loginUser,
+    refreshToken
 }
