@@ -17,10 +17,12 @@ const loginUser= async(payload:{
     })
 
     const isCorrectPassword:boolean = await bcrypt.compare(payload.password, userData.password)
-    console.log("login service", isCorrectPassword);
+    // console.log("login service", isCorrectPassword);
 
-
-    const jwtToken= jwt.sign({
+if(!isCorrectPassword){
+    throw new Error("password incorrect")
+}
+    const accessToken= jwt.sign({
         email:userData.email,
         role: userData.role
     },
@@ -31,11 +33,25 @@ const loginUser= async(payload:{
         expiresIn:"15m"
     }
 ) 
-console.log(jwtToken);
+// console.log(accessToken);
+const refreshToken= jwt.sign({
+    email:userData.email,
+    role: userData.role
+},
+'fghgjkhgjfhgdhgghhg',
+
+{
+    algorithm:"HS256",
+    expiresIn:"30d"
+}
+) 
 
 
-
-    return userData
+    return {
+        accessToken,
+        refreshToken,
+        needPasswordChange:userData.needPasswordChange
+    }
 }
 
 
