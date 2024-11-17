@@ -26,7 +26,10 @@ const{refreshToken} = result;
     })
 })
 const refreshToken = catchAsync(async(req:Request, res:Response)=>{
-    const result = await authServices.loginUser(req.body)
+    const {refreshToken}= req.cookies;
+    console.log("refresh token", refreshToken);
+    
+    const result = await authServices.refreshToken(refreshToken)
 
 
     sendResponse(res,{
