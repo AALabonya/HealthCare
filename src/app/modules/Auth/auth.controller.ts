@@ -44,5 +44,6 @@ const refreshToken = catchAsync(async(req:Request, res:Response)=>{
     })
 })
 export const authController={
-    loginUser
+    loginUser,
+    refreshToken
 }
