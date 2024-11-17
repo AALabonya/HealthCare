@@ -55,8 +55,8 @@ const refreshToken= jwt.sign({
 }
 
 
-const refreshToken= async()=>{
-    console.log('refresh token');
+const refreshToken= async(token:string)=>{
+    console.log('refresh token', token);
     
 }
 

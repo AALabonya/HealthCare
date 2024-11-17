@@ -25,7 +25,21 @@ const{refreshToken} = result;
         }
     })
 })
+const refreshToken = catchAsync(async(req:Request, res:Response)=>{
+    const result = await authServices.loginUser(req.body)
 
+
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"logged id successfully",
+        data:result
+        // data:{
+        //     accessToken:result.accessToken,
+        //     needPasswordChange: result.needPasswordChange
+        // }
+    })
+})
 export const authController={
     loginUser
 }
